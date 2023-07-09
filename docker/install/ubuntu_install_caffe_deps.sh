@@ -22,6 +22,6 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   protobuf-compiler \
   python-dev \
   python-numpy \
-  python-pip \
+  python3-pip \
   python-setuptools \
-  python-scipy
+  python3-scipy
