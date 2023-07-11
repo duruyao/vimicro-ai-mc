@@ -6,7 +6,7 @@ set -o pipefail
 
 pip3 install --upgrade \
   scikit-image \
-  python-lmdb \
+  lmdb \
   pycrypto \
   pandas \
   dill \
