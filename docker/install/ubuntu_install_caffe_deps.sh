@@ -25,3 +25,9 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   python3-pip \
   python-setuptools \
   python3-scipy
+
+pip3 install --no-cache-dir \
+  numpy \
+  protobuf \
+  scikit-image \
+  six
