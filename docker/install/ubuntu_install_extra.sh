@@ -4,7 +4,7 @@ set -e
 set -u
 set -o pipefail
 
-pip3 install --upgrade --no-cache-dir \
+pip3 install --no-cache-dir \
   scikit-image \
   lmdb \
   pycrypto \

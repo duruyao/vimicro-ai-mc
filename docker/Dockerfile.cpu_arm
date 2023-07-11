@@ -6,6 +6,9 @@ COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
 RUN apt-get update --fix-missing
 
+COPY install/ubuntu_setup_tz.sh /install/ubuntu_setup_tz.sh
+RUN bash /install/ubuntu_setup_tz.sh
+
 COPY install/ubuntu_install_core.sh /install/ubuntu_install_core.sh
 RUN bash /install/ubuntu_install_core.sh
 
@@ -15,8 +18,14 @@ RUN bash /install/ubuntu_install_dev_tools.sh
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh
 
+COPY install/ubuntu_install_python_package.sh /install/ubuntu_install_python_package.sh
+RUN bash /install/ubuntu_install_python_package.sh
+
 COPY install/ubuntu_install_tensorflow_aarch64.sh /install/ubuntu_install_tensorflow_aarch64.sh
 RUN bash /install/ubuntu_install_tensorflow_aarch64.sh
+
+COPY install/ubuntu_install_tflite.sh /install/ubuntu_install_tflite.sh
+RUN bash /install/ubuntu_install_tflite.sh
 
 COPY install/ubuntu_install_onnx.sh /install/ubuntu_install_onnx.sh
 RUN bash /install/ubuntu_install_onnx.sh
@@ -24,8 +33,8 @@ RUN bash /install/ubuntu_install_onnx.sh
 COPY install/ubuntu_install_torch.sh /install/ubuntu_install_torch.sh
 RUN bash /install/ubuntu_install_torch.sh
 
-COPY install/ubuntu_install_py_packages.sh /install/ubuntu_install_py_packages.sh
-RUN bash /install/ubuntu_install_py_packages.sh
+COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
+RUN bash /install/ubuntu_install_extra.sh
 
 COPY conf/root.bashrc /conf/root.bashrc
 RUN cat /conf/root.bashrc >> /root/.bashrc
