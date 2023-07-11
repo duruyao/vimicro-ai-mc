@@ -4,7 +4,7 @@ set -e
 set -u
 set -o pipefail
 
-pip3 install --upgrade \
+pip3 install --upgrade --no-cache-dir \
   scikit-image \
   lmdb \
   pycrypto \
@@ -12,4 +12,4 @@ pip3 install --upgrade \
   dill \
   openpyxl \
   numpy \
-  pillow --no-cache-dir
+  pillow
