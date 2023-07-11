@@ -33,4 +33,6 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   curl \
   wget \
   python3 \
-  python3-pip
+  python3-pip \
+  python3-dev \
+  python3-venv
