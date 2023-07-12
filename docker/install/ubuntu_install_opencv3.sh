@@ -4,9 +4,25 @@ set -e
 set -u
 set -o pipefail
 
-# remove opencv4 and install opencv3 on Ubuntu 20.04 LTS
-apt-get update && apt-install-and-clear -y --no-install-recommends software-properties-common
-apt-get remove --autoremove -y libopencv-dev
-add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
-apt-get update && apt-install-and-clear -y --no-install-recommends libopencv-dev
-pkg-config --modversion opencv
+# install opencv3 on Ubuntu 20.04 LTS
+mkdir -p /install/ubuntu_install_opencv3
+pushd /install/ubuntu_install_opencv3
+
+git clone https://github.com/opencv/opencv_contrib.git --branch 3.3.1 --depth 1
+git clone https://github.com/opencv/opencv.git --branch 3.3.1 --depth 1
+pushd opencv
+sed -i "s/char\* str = PyString_AsString(obj);/const char\* str = PyString_AsString(obj);/g" modules/python/src2/cv2.cpp
+cmake -H. -B build -D CMAKE_BUILD_TYPE=RELEASE \
+  -D CMAKE_INSTALL_PREFIX=/opt/opencv3 \
+  -D BUILD_EXAMPLES=OFF \
+  -D INSTALL_C_EXAMPLES=OFF \
+  -D INSTALL_PYTHON_EXAMPLES=OFF \
+  -D WITH_CUDA=OFF \
+  -D BUILD_opencv_xfeatures2d=OFF \
+  -D BUILD_opencv_python2=OFF \
+  -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules
+cmake --build build --target all -- -j $(($(nproc) - 1))
+cmake --build build --target install
+popd
+
+popd

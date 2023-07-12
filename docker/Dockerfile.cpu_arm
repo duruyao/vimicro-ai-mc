@@ -30,8 +30,13 @@ RUN bash /install/ubuntu_install_onnx.sh
 COPY install/ubuntu_install_torch.sh /install/ubuntu_install_torch.sh
 RUN bash /install/ubuntu_install_torch.sh
 
+COPY install/ubuntu_install_opencv3.sh /install/ubuntu_install_opencv3.sh
+RUN bash /install/ubuntu_install_opencv3.sh
+
 COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
 RUN bash /install/ubuntu_install_extra.sh
 
 COPY conf/root.bashrc /conf/root.bashrc
 RUN cat /conf/root.bashrc >> /root/.bashrc
+
+RUN rm -rf /install
