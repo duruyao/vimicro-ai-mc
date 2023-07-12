@@ -12,6 +12,9 @@ git clone https://github.com/opencv/opencv_contrib.git --branch 3.3.1 --depth 1
 git clone https://github.com/opencv/opencv.git --branch 3.3.1 --depth 1
 pushd opencv
 sed -i "s/char\* str = PyString_AsString(obj);/const char\* str = PyString_AsString(obj);/g" modules/python/src2/cv2.cpp
+sed -i "1i #define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)" modules/videoio/src/cap_ffmpeg_impl.hpp
+sed -i "2i #define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER" modules/videoio/src/cap_ffmpeg_impl.hpp
+sed -i "3i #define AVFMT_RAWPICTURE 0x0020" modules/videoio/src/cap_ffmpeg_impl.hpp
 cmake -H. -B build -D CMAKE_BUILD_TYPE=RELEASE \
   -D CMAKE_INSTALL_PREFIX=/opt/opencv3 \
   -D BUILD_EXAMPLES=OFF \
