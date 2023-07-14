@@ -30,3 +30,4 @@ cmake --build build --target install
 popd
 
 popd
+rm -rf /install/ubuntu_install_opencv3
