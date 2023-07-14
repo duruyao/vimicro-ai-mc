@@ -63,4 +63,12 @@ ${BOLD}
 3) Convert Caffe models to NPU models${NBOLD}
   See how to convert Caffe models to NPU models:
   ${CMD}caffe2npu --help${NCMD}
+${BOLD}
+4) Examples${NBOLD}
+  ${BOLD}*${NBOLD} /opt/mc/example/AlexNet
+  ${BOLD}*${NBOLD} /opt/mc/example/DenseNet121
+  ${BOLD}*${NBOLD} /opt/mc/example/GoogLeNet
+  ${BOLD}*${NBOLD} /opt/mc/example/ResNet18
+  ${BOLD}*${NBOLD} /opt/mc/example/YOLOv3
+  ${BOLD}*${NBOLD} /opt/mc/example/YOLOv5s
 "
