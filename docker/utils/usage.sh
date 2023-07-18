@@ -38,23 +38,26 @@ CMD="\033[7m  "
 NCMD="  ${NC}"
 
 echo -e "${BOLD}
- __      __  _____   __  __   _____    _____   _____     ____                        _____            __  __    _____
- \ \    / / |_   _| |  \/  | |_   _|  / ____| |  __ \   / __ \               /\     |_   _|          |  \/  |  / ____|
-  \ \  / /    | |   | \  / |   | |   | |      | |__) | | |  | |  ______     /  \      | |    ______  | \  / | | |
-   \ \/ /     | |   | |\/| |   | |   | |      |  _  /  | |  | | |______|   / /\ \     | |   |______| | |\/| | | |
-    \  /     _| |_  | |  | |  _| |_  | |____  | | \ \  | |__| |           / ____ \   _| |_           | |  | | | |____
-     \/     |_____| |_|  |_| |_____|  \_____| |_|  \_\  \____/           /_/    \_\ |_____|          |_|  |_|  \_____|${NBOLD}
+ __   __  _____    _    _                       _____            __  __    _____
+ \ \ / / |  __ \  | |  | |              /\     |_   _|          |  \/  |  / ____|
+  \ V /  | |__) | | |  | |  ______     /  \      | |    ______  | \  / | | |
+   > <   |  ___/  | |  | | |______|   / /\ \     | |   |______| | |\/| | | |
+  / . \  | |      | |__| |           / ____ \   _| |_           | |  | | | |____
+ /_/ \_\ |_|       \____/           /_/    \_\ |_____|          |_|  |_|  \_____|${NBOLD}
 
+ Release  Version: 0.9.1 (cpu only)
+ Current Platform: linux/arm64/v8
+ Target  Platform: vimicro vc0768 soc
 ${BOLD}
 1) Launch the docker image${NBOLD}
   Move to a workspace with complete code and data:
   ${CMD}cd /path/to/your_workspace${NCMD}
 
   Launch the docker image and use the built-in model compilation tools:
-  ${CMD}docker run -it --rm -w \$PWD -v \$(realpath \$PWD):\$PWD duruyao/vimicro-ai-mc:768_cpu bash${NCMD}
+  ${CMD}docker run -it --rm -w \$PWD -v \$(realpath \$PWD):\$PWD duruyao/xpu-ai-mc:768 bash${NCMD}
 
   Launch the docker image and install the latest model compilation tools (${BOLD}NOT REQUIRED${NBOLD}):
-  ${CMD}docker run -it --rm -w \$PWD -v \$(realpath \$PWD):\$PWD -v /path/to/mc_release:/opt/mc duruyao/vimicro-ai-mc:768_cpu bash${NCMD}
+  ${CMD}docker run -it --rm -w \$PWD -v \$(realpath \$PWD):\$PWD -v /path/to/mc_release:/opt/mc duruyao/xpu-ai-mc:768 bash${NCMD}
 ${BOLD}
 2) Convert other AI models to Caffe models${NBOLD}
   See how to convert other AI models to Caffe models:
