@@ -20,10 +20,10 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   libprotobuf-dev \
   libsnappy-dev \
   protobuf-compiler \
-  python-dev \
-  python-numpy \
+  python3-dev \
+  python3-numpy \
   python3-pip \
-  python-setuptools \
+  python3-setuptools \
   python3-scipy
 
 pip3 install --no-cache-dir \
