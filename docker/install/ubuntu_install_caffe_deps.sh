@@ -19,12 +19,7 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   libopencv-dev \
   libprotobuf-dev \
   libsnappy-dev \
-  protobuf-compiler \
-  python3-dev \
-  python3-numpy \
-  python3-pip \
-  python3-setuptools \
-  python3-scipy
+  protobuf-compiler
 
 pip3 install --no-cache-dir \
   numpy \
