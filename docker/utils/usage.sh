@@ -45,7 +45,7 @@ echo -e "${BOLD}
   / . \  | |      | |__| |           / ____ \   _| |_           | |  | | | |____
  /_/ \_\ |_|       \____/           /_/    \_\ |_____|          |_|  |_|  \_____|${NBOLD}
 
- Release  Version: 0.9.1 (cpu only)
+ Release  Version: 0.9.2 (cpu only)
  Current Platform: linux/arm64/v8
  Target  Platform: vimicro vc0768 soc
 ${BOLD}
