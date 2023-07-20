@@ -45,9 +45,12 @@ echo -e "${BOLD}
   / . \  | |      | |__| |           / ____ \   _| |_           | |  | | | |____
  /_/ \_\ |_|       \____/           /_/    \_\ |_____|          |_|  |_|  \_____|${NBOLD}
 
- Release  Version: 0.9.2 (cpu only)
- Current Platform: linux/arm64/v8
- Target  Platform: vimicro vc0768 soc
+ +-----------+------------------+--------------------+
+ |           | Version          | Platform           |
+ +-----------+------------------+--------------------+
+ | AI-MC     | 0.9.2 (cpu only) | linux/arm64/v8     |
+ | NPU Model | 1.0.8.9          | vimicro vc0768 soc |
+ +-----------+------------------+--------------------+
 ${BOLD}
 1) Launch the docker image${NBOLD}
   Move to a workspace with complete code and data:
