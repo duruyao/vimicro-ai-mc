@@ -25,4 +25,5 @@ pip3 install --no-cache-dir \
   numpy \
   protobuf \
   scikit-image \
-  six
+  six \
+  opencv-python
