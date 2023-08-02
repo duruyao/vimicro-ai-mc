@@ -1,4 +1,6 @@
 
+export PATH="$HOME/.local/bin:$PATH"
+export PYTHONPATH="$HOME/.local/lib/python3.7/dist-packages:$PYTHONPATH"
 # export MCHOME="/opt/mc"
 # export PYTHONPATH="$MCHOME/toolchain/caffe/python:$PYTHONPATH"
 # export LD_LIBRARY_PATH="$MCHOME/toolchain/caffe/build/lib:$LD_LIBRARY_PATH"
