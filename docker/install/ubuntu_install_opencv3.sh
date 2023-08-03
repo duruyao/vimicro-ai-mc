@@ -18,6 +18,7 @@ sed -i "1i\\
 #define AVFMT_RAWPICTURE 0x0020" modules/videoio/src/cap_ffmpeg_impl.hpp
 cmake -H. -B build -D CMAKE_BUILD_TYPE=RELEASE \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
+  -D CMAKE_CXX_STANDARD=11 \
   -D BUILD_EXAMPLES=OFF \
   -D INSTALL_C_EXAMPLES=OFF \
   -D INSTALL_PYTHON_EXAMPLES=OFF \
