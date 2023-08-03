@@ -16,6 +16,8 @@ sed -i "1i\\
 #define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)\\
 #define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER\\
 #define AVFMT_RAWPICTURE 0x0020" modules/videoio/src/cap_ffmpeg_impl.hpp
+sed -i "s|CV_Assert(cost.size > 0);|CV_Assert(cost.size > (const int*)(0));|g" ../opencv_contrib/modules/stereo/src/descriptor.cpp
+sed -i "s|CV_Assert(image.size > 0);|CV_Assert(image.size > (const int*)(0));|g" ../opencv_contrib/modules/stereo/src/descriptor.cpp
 cmake -H. -B build -D CMAKE_BUILD_TYPE=RELEASE \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
   -D CMAKE_CXX_STANDARD=11 \
