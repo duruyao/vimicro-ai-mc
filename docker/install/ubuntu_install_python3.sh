@@ -6,7 +6,10 @@ set -o pipefail
 
 apt-get update && apt-install-and-clear -y --no-install-recommends \
   lsb-core \
-  software-properties-common
+  software-properties-common \
+  gnupg2
+
+gpg-agent --daemon
 
 PYTHON_VERSION="3.7"
 if [ "${1-}" == "3.8" ] || [ "${1-}" == "3.9" ]; then
