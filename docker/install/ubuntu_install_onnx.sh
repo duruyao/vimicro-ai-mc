@@ -5,6 +5,6 @@ set -u
 set -o pipefail
 
 pip3 install --no-cache-dir \
-  onnx==1.12.0 \
-  onnxruntime==1.12.1 \
-  onnxoptimizer==0.2.7
+  onnx==1.14.0 \
+  onnxruntime==1.15.1 \
+  onnxoptimizer==0.3.13
