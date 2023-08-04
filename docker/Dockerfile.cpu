@@ -45,6 +45,10 @@ RUN bash /install/ubuntu_install_caffe_deps.sh
 COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
 RUN bash /install/ubuntu_install_extra.sh
 
+ENV SHELL="/usr/bin/zsh"
+COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
+RUN bash /install/ubuntu_install_zsh.sh
+
 #ENV VIMICRO_CAFFE_COMMIT_SHA="e194fbd58cefec2092a369bc8b9f96f14dbf1932"
 #COPY sdk/linux/arm64/v8/caffe /opt/caffe
 
@@ -54,8 +58,8 @@ RUN bash /install/ubuntu_install_extra.sh
 
 #COPY utils/usage.sh /usr/local/bin/usage
 
-COPY conf/root.bashrc /conf/root.bashrc
-RUN cat /conf/root.bashrc >> /root/.bashrc
+COPY conf/root.zshrc /root/.zshrc
+COPY conf/root.bashrc /root/.bashrc
 
 ARG PY3_VERSION="$(python3 --version | awk '{print $2}')"
 ARG PY3_MAJOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f1)"
