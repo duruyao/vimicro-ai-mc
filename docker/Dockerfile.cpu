@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-# tag: v0.9.2
+# tag:
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
@@ -57,7 +57,13 @@ RUN bash /install/ubuntu_install_extra.sh
 COPY conf/root.bashrc /conf/root.bashrc
 RUN cat /conf/root.bashrc >> /root/.bashrc
 
+ARG PY3_VERSION="$(python3 --version | awk '{print $2}')"
+ARG PY3_MAJOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f1)"
+ARG PY3_MINOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f2)"
+ARG PY3_PATCH_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f3)"
+ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
+
 #ENV MCHOME="/opt/mc"
-#ENV PYTHONPATH="$MCHOME/toolchain/caffe/python:$PYTHONPATH"
-#ENV LD_LIBRARY_PATH="$MCHOME/toolchain/caffe/build/lib:$LD_LIBRARY_PATH"
-ENV LD_PRELOAD="/usr/local/lib/python3.9/dist-packages/torch/lib/libgomp-d22c30c5.so.1 $LD_PRELOAD"
+#ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
+#ENV LD_LIBRARY_PATH="${MCHOME}/toolchain/caffe/build/lib:${LD_LIBRARY_PATH}"
+#ENV LD_PRELOAD="/usr/local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages/torch/lib/libgomp-d22c30c5.so.1 ${LD_PRELOAD}"
