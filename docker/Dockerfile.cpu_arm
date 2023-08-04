@@ -58,8 +58,11 @@ COPY sdk/linux/arm64/v8/mc /opt/mc
 
 COPY utils/usage.sh /usr/local/bin/usage
 
-COPY conf/root.zshrc /root/.zshrc
-COPY conf/root.bashrc /root/.bashrc
+ARG HOME="/root"
+COPY conf/.vimrc "${HOME}"/.vimrc
+COPY conf/.zshrc "${HOME}"/.zshrc
+COPY conf/.bashrc "${HOME}"/.bashrc
+COPY conf/.tmux.conf "${HOME}"/.tmux.conf
 
 ARG PY3_VERSION="$(python3 --version | awk '{print $2}')"
 ARG PY3_MAJOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f1)"
