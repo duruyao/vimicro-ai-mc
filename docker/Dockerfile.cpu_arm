@@ -49,6 +49,9 @@ ENV SHELL="/usr/bin/zsh"
 COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
 RUN bash /install/ubuntu_install_zsh.sh
 
+COPY install/ubuntu_install_vim.sh /install/ubuntu_install_vim.sh
+RUN bash /install/ubuntu_install_vim.sh
+
 ENV VIMICRO_CAFFE_COMMIT_SHA="e194fbd58cefec2092a369bc8b9f96f14dbf1932"
 COPY sdk/linux/arm64/v8/caffe /opt/caffe
 
