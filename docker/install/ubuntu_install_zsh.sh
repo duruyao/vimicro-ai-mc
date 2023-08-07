@@ -9,7 +9,7 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   git \
   zsh
 
-HOME="/root"
+HOME="${HOME:-"/root"}"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 

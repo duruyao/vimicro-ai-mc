@@ -9,7 +9,7 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   git \
   vim
 
-HOME="/root"
+HOME="${HOME:-"/root"}"
 
 mkdir -p "${HOME}"/.vim/autoload "${HOME}"/.vim/bundle &&
   curl -sSL https://tpo.pe/pathogen.vim -o "${HOME}"/.vim/autoload/pathogen.vim
