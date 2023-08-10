@@ -14,6 +14,6 @@ docker buildx build --allow security.insecure --platform linux/amd64    -t duruy
 docker buildx build --allow security.insecure --platform linux/amd64    -t duruyao/vimicro-mc:gpu     -f Dockerfile.gpu     --load . --progress plain >nohup-gpu.out     2>&1
 docker buildx build --allow security.insecure --platform linux/arm64/v8 -t duruyao/vimicro-mc:cpu_arm -f Dockerfile.cpu_arm --load . --progress plain >nohup-cpu-arm.out 2>&1
 
-docker manifest push duruyao/vimicro-mc:cpu
-docker manifest push duruyao/vimicro-mc:gpu
-docker manifest push duruyao/vimicro-mc:cpu_arm
+docker push duruyao/vimicro-mc:cpu
+docker push duruyao/vimicro-mc:gpu
+docker push duruyao/vimicro-mc:cpu_arm
