@@ -77,3 +77,5 @@ ENV MCHOME="/opt/mc"
 ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
 ENV LD_LIBRARY_PATH="${MCHOME}/toolchain/caffe/build/lib:${LD_LIBRARY_PATH}"
 ENV LD_PRELOAD="/usr/local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages/torch/lib/libgomp-d22c30c5.so.1 ${LD_PRELOAD}"
+
+ENV LANG=C.UTF-8
