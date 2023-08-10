@@ -24,4 +24,5 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   pkg-config \
   sudo \
   unzip \
-  wget
+  wget \
+  less
