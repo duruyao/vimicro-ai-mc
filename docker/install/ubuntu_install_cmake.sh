@@ -14,7 +14,7 @@ wget "https://github.com/Kitware/CMake/releases/download/v${version}/cmake-${ver
 tar -zxvf "cmake-${version}.tar.gz"
 pushd "cmake-${version}"
 chmod +x ./bootstrap
-./bootstrap
+./bootstrap --prefix=/usr/local
 make -j $(($(nproc) - 1))
 make install
 popd
