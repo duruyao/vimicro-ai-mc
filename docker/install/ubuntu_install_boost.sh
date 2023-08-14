@@ -19,8 +19,8 @@ curl -ksSLO https://boostorg.jfrog.io/artifactory/main/release/1.67.0/source/boo
 tar -zxvf boost_1_67_0.tar.gz
 pushd boost_1_67_0
 chmod +x ./bootstrap.sh
-./bootstrap.sh --with-python="$(which python"${PYTHON_VERSION}")"
-./b2 install --with-python --with-system --with-filesystem --with-thread --with-regex
+./bootstrap.sh --with-libraries=all --with-python="$(which python"${PYTHON_VERSION}")" --prefix=/usr/local
+./b2 install -j $(($(nproc) - 1))
 ln -s /usr/local/lib/libboost_python"${PY_VERSION}".so.1.67.0 /usr/local/lib/libboost_python.so
 ln -s /usr/local/lib/libboost_python"${PY_VERSION}".a /usr/local/lib/libboost_python.a
 popd
