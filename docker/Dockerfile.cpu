@@ -49,6 +49,7 @@ ENV SHELL="/usr/bin/zsh"
 COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
 RUN bash /install/ubuntu_install_zsh.sh
 
+ENV LANG=C.UTF-8
 COPY install/ubuntu_install_vim.sh /install/ubuntu_install_vim.sh
 RUN bash /install/ubuntu_install_vim.sh
 
@@ -77,5 +78,3 @@ ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 #ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
 
 ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION="python"
-
-ENV LANG=C.UTF-8

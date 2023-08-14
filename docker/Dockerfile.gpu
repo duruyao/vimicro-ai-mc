@@ -52,6 +52,7 @@ ENV SHELL="/usr/bin/zsh"
 COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
 RUN bash /install/ubuntu_install_zsh.sh
 
+ENV LANG=C.UTF-8
 COPY install/ubuntu_install_vim.sh /install/ubuntu_install_vim.sh
 RUN bash /install/ubuntu_install_vim.sh
 
@@ -86,5 +87,3 @@ ENV C_INCLUDE_PATH="/usr/local/cuda/include:${C_INCLUDE_PATH}"
 ENV CPLUS_INCLUDE_PATH="/usr/local/cuda/include:${CPLUS_INCLUDE_PATH}"
 ENV LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda/compat:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/usr/local/cuda/lib64:/usr/local/cuda/compat:${LD_LIBRARY_PATH}"
-
-ENV LANG=C.UTF-8
