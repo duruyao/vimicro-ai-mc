@@ -10,8 +10,8 @@ if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   CMAKE_VERSION="${1}"
 fi
 
-mkdir -p /install/ubuntu_install_cmake
-pushd /install/ubuntu_install_cmake
+mkdir -p /install/ubuntu_install_cmake_from_source
+pushd /install/ubuntu_install_cmake_from_source
 
 echo "Installing cmake ${CMAKE_VERSION}"
 wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz"
@@ -24,4 +24,4 @@ make install
 popd
 
 popd
-rm -rf /install/ubuntu_install_cmake
+rm -rf /install/ubuntu_install_cmake_from_source

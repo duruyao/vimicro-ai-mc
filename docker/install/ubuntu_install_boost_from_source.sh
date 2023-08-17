@@ -19,8 +19,8 @@ if [ "${2:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   PY_VERSION="${2//./}"
 fi
 
-mkdir -p /install/ubuntu_install_boost
-pushd /install/ubuntu_install_boost
+mkdir -p /install/ubuntu_install_boost_from_source
+pushd /install/ubuntu_install_boost_from_source
 
 curl -ksSLO "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_TAR_NAME}.tar.gz"
 tar -zxvf "${BOOST_TAR_NAME}.tar.gz"
@@ -33,4 +33,4 @@ ln -s "/usr/local/lib/libboost_python${PY_VERSION}.a" /usr/local/lib/libboost_py
 popd
 
 popd
-rm -rf /install/ubuntu_install_boost
+rm -rf /install/ubuntu_install_boost_from_source

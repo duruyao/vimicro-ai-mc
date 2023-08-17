@@ -18,8 +18,8 @@ RUN bash /install/ubuntu_install_core.sh
 COPY install/ubuntu_install_dev_tools.sh /install/ubuntu_install_dev_tools.sh
 RUN bash /install/ubuntu_install_dev_tools.sh
 
-COPY install/ubuntu_install_cmake.sh /install/ubuntu_install_cmake.sh
-RUN bash /install/ubuntu_install_cmake.sh
+COPY install/ubuntu_install_cmake_from_source.sh /install/ubuntu_install_cmake_from_source.sh
+RUN bash /install/ubuntu_install_cmake_from_source.sh
 
 COPY install/ubuntu_install_python3_from_source.sh /install/ubuntu_install_python3_from_source.sh
 RUN bash /ubuntu_install_python3_from_source.sh "3.9.17"
@@ -36,11 +36,11 @@ RUN bash /install/ubuntu_install_onnx_gpu.sh
 COPY install/ubuntu_install_torch.sh /install/ubuntu_install_torch.sh
 RUN bash /install/ubuntu_install_torch.sh
 
-COPY install/ubuntu_install_opencv3.sh /install/ubuntu_install_opencv3.sh
-RUN bash /install/ubuntu_install_opencv3.sh
+COPY install/ubuntu_install_opencv3_from_source.sh /install/ubuntu_install_opencv3_from_source.sh
+RUN bash /install/ubuntu_install_opencv3_from_source.sh
 
-COPY install/ubuntu_install_boost.sh /install/ubuntu_install_boost.sh
-RUN bash /install/ubuntu_install_boost.sh "1.67.0" "3.9"
+COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
+RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
 
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh

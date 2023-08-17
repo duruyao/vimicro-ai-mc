@@ -10,8 +10,8 @@ if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   OPENCV_VERSION="${1}"
 fi
 
-mkdir -p /install/ubuntu_install_opencv3
-pushd /install/ubuntu_install_opencv3
+mkdir -p /install/ubuntu_install_opencv3_from_source
+pushd /install/ubuntu_install_opencv3_from_source
 
 git clone https://github.com/opencv/opencv_contrib.git --branch "${OPENCV_VERSION}" --depth 1
 git clone https://github.com/opencv/opencv.git --branch "${OPENCV_VERSION}" --depth 1
@@ -38,4 +38,4 @@ cmake --build build --target install
 popd
 
 popd
-rm -rf /install/ubuntu_install_opencv3
+rm -rf /install/ubuntu_install_opencv3_from_source
