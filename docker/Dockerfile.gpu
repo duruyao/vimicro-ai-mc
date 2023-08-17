@@ -72,9 +72,9 @@ COPY conf/.bashrc "${HOME}"/.bashrc
 COPY conf/.tmux.conf "${HOME}"/.tmux.conf
 
 ARG PY3_VERSION="$(python3 --version | awk '{print $2}')"
-ARG PY3_MAJOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f1)"
-ARG PY3_MINOR_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f2)"
-ARG PY3_PATCH_VERSION="$(echo ${PY3_VERSION} | cut -d'.' -f3)"
+ARG PY3_MAJOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f1)"
+ARG PY3_MINOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f2)"
+ARG PY3_PATCH_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f3)"
 ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 
 #ENV MCHOME="/opt/mc"
