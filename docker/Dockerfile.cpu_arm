@@ -18,8 +18,8 @@ RUN bash /install/ubuntu_install_dev_tools.sh
 COPY install/ubuntu_install_cmake.sh /install/ubuntu_install_cmake.sh
 RUN bash /install/ubuntu_install_cmake.sh
 
-COPY install/ubuntu_install_python3.sh /install/ubuntu_install_python3.sh
-RUN bash /install/ubuntu_install_python3.sh "3.10"
+COPY install/ubuntu_install_python3_from_source.sh /install/ubuntu_install_python3_from_source.sh
+RUN bash /ubuntu_install_python3_from_source.sh "3.9.17"
 
 COPY install/ubuntu_install_tensorflow_aarch64.sh /install/ubuntu_install_tensorflow_aarch64.sh
 RUN bash /install/ubuntu_install_tensorflow_aarch64.sh
@@ -37,7 +37,7 @@ RUN bash /install/ubuntu_install_torch.sh
 #RUN bash /install/ubuntu_install_opencv3.sh
 
 COPY install/ubuntu_install_boost.sh /install/ubuntu_install_boost.sh
-RUN bash /install/ubuntu_install_boost.sh "1.67.0" "3.10"
+RUN bash /install/ubuntu_install_boost.sh "1.67.0" "3.9"
 
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh
