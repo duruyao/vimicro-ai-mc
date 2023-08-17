@@ -12,7 +12,7 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
 gpg-agent --daemon
 
 PYTHON_VERSION="3.7"
-if [ "${1-}" == "3.8" ] || [ "${1-}" == "3.9" ]; then
+if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   PYTHON_VERSION="${1}"
 fi
 add-apt-repository -y ppa:deadsnakes/ppa

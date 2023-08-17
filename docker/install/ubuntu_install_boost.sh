@@ -10,7 +10,7 @@ pushd /install/ubuntu_install_boost
 
 PYTHON_VERSION="3.7"
 PY_VERSION="37"
-if [ "${1-}" == "3.8" ] || [ "${1-}" == "3.9" ]; then
+if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   PYTHON_VERSION="${1}"
   PY_VERSION="${1//./}"
 fi
