@@ -4,12 +4,16 @@ set -e
 set -u
 set -o pipefail
 
-# install opencv3 on Ubuntu 20.04 LTS
+OPENCV_VERSION="3.3.1"
+if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
+  OPENCV_VERSION="${1}"
+fi
+
 mkdir -p /install/ubuntu_install_opencv3
 pushd /install/ubuntu_install_opencv3
 
-git clone https://github.com/opencv/opencv_contrib.git --branch 3.3.1 --depth 1
-git clone https://github.com/opencv/opencv.git --branch 3.3.1 --depth 1
+git clone https://github.com/opencv/opencv_contrib.git --branch "${OPENCV_VERSION}" --depth 1
+git clone https://github.com/opencv/opencv.git --branch "${OPENCV_VERSION}" --depth 1
 pushd opencv
 sed -i "s/char\* str = PyString_AsString(obj);/const char\* str = PyString_AsString(obj);/g" modules/python/src2/cv2.cpp
 sed -i "1i\\

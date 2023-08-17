@@ -37,7 +37,7 @@ RUN bash /install/ubuntu_install_torch.sh
 #RUN bash /install/ubuntu_install_opencv3.sh
 
 COPY install/ubuntu_install_boost.sh /install/ubuntu_install_boost.sh
-RUN bash /install/ubuntu_install_boost.sh "3.10"
+RUN bash /install/ubuntu_install_boost.sh "1.67.0" "3.10"
 
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh

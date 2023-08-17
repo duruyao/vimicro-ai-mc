@@ -4,17 +4,17 @@ set -e
 set -u
 set -o pipefail
 
+PYTHON_VERSION="3.7"
+if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
+  PYTHON_VERSION="${1}"
+fi
+
 apt-get update && apt-install-and-clear -y --no-install-recommends \
   lsb-core \
   software-properties-common \
   gnupg2
 
 gpg-agent --daemon
-
-PYTHON_VERSION="3.7"
-if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
-  PYTHON_VERSION="${1}"
-fi
 add-apt-repository -y ppa:deadsnakes/ppa
 
 apt-get update && apt-install-and-clear -y --no-install-recommends \
