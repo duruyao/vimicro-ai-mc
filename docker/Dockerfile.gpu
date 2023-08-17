@@ -22,7 +22,7 @@ COPY install/ubuntu_install_cmake_from_source.sh /install/ubuntu_install_cmake_f
 RUN bash /install/ubuntu_install_cmake_from_source.sh
 
 COPY install/ubuntu_install_python3_from_source.sh /install/ubuntu_install_python3_from_source.sh
-RUN bash /ubuntu_install_python3_from_source.sh "3.9.17"
+RUN bash /install/ubuntu_install_python3_from_source.sh "3.9.17"
 
 COPY install/ubuntu_install_tensorflow_gpu.sh /install/ubuntu_install_tensorflow_gpu.sh
 RUN bash /install/ubuntu_install_tensorflow_gpu.sh
