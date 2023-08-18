@@ -27,7 +27,7 @@ pushd /install/ubuntu_install_python3_from_source
 wget "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz"
 tar -xf "Python-${PYTHON_VERSION}.tar.xz"
 pushd "Python-${PYTHON_VERSION}"
-./configure --enable-optimizations --prefix=/usr
+./configure CFLAGS="-fPIC" --enable-optimizations --prefix=/usr
 make -j $(($(nproc) - 1))
 make altinstall
 popd
