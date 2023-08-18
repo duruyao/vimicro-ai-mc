@@ -22,7 +22,7 @@ fi
 mkdir -p /install/ubuntu_install_boost_from_source
 pushd /install/ubuntu_install_boost_from_source
 
-curl -ksSLO "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_TAR_NAME}.tar.gz"
+wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_TAR_NAME}.tar.gz"
 tar -zxvf "${BOOST_TAR_NAME}.tar.gz"
 pushd "${BOOST_TAR_NAME}"
 chmod +x ./bootstrap.sh
