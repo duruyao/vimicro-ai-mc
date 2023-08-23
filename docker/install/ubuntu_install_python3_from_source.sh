@@ -19,7 +19,9 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   libssl-dev \
   libreadline-dev \
   libffi-dev \
-  wget
+  libsqlite3-dev \
+  wget \
+  libbz2-dev
 
 mkdir -p /install/ubuntu_install_python3_from_source
 pushd /install/ubuntu_install_python3_from_source
