@@ -39,6 +39,12 @@ RUN bash /install/ubuntu_install_opencv3_from_source.sh
 COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
 RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
 
+COPY install/ubuntu_install_abseil_from_source.sh /install/ubuntu_install_abseil_from_source.sh
+RUN bash /install/ubuntu_install_abseil_from_source.sh
+
+COPY install/ubuntu_install_protobuf_from_source.sh /install/ubuntu_install_protobuf_from_source.sh
+RUN bash /install/ubuntu_install_protobuf_from_source.sh
+
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh
 
@@ -76,5 +82,3 @@ ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 
 #ENV MCHOME="/opt/mc"
 #ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
-
-ENV PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION="python"

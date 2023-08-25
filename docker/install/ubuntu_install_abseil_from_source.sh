@@ -5,32 +5,30 @@ set -e
 set -u
 set -o pipefail
 
-PROTOBUF_VERSION="24.1"
+ABSEIL_VERSION="20230802.0"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
-  PROTOBUF_VERSION="${1}"
+  ABSEIL_VERSION="${1}"
 fi
 
-apt-get remove -y --purge protobuf-compiler libprotobuf-dev && true
+mkdir -p /install/ubuntu_install_abseil_from_source
+pushd /install/ubuntu_install_abseil_from_source
 
-mkdir -p /install/ubuntu_install_protobuf_from_source
-pushd /install/ubuntu_install_protobuf_from_source
-
-git clone https://github.com/protocolbuffers/protobuf.git --branch "v${PROTOBUF_VERSION}" --recurse-submodules --depth 1
-pushd protobuf
+git clone https://github.com/abseil/abseil-cpp --branch "${ABSEIL_VERSION}" --depth 1
+pushd abseil-cpp
 cmake -H. -B build \
   -D BUILD_SHARED_LIBS=ON \
   -D CMAKE_CXX_STANDARD=17 \
   -D CMAKE_BUILD_TYPE=Release \
+  -D ABSL_ENABLE_INSTALL=ON \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
   -D CMAKE_POSITION_INDEPENDENT_CODE=ON \
   -D CMAKE_SKIP_BUILD_RPATH=OFF \
   -D CMAKE_BUILD_WITH_INSTALL_RPATH=OFF \
   -D CMAKE_INSTALL_RPATH=/usr/local/lib \
-  -D CMAKE_INSTALL_RPATH_USE_LINK_PATH=ON \
-  -D protobuf_BUILD_TESTS=OFF
+  -D CMAKE_INSTALL_RPATH_USE_LINK_PATH=ON
 cmake --build build --target all -- -j $(($(nproc) - 1))
 cmake --build build --target install
 popd
 
 popd
-rm -rf /install/ubuntu_install_protobuf_from_source
+rm -rf /install/ubuntu_install_abseil_from_source
