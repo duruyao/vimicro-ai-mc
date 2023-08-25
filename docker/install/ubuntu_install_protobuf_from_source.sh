@@ -5,7 +5,7 @@ set -e
 set -u
 set -o pipefail
 
-PROTOBUF_VERSION="24.1"
+PROTOBUF_VERSION="21.1"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   PROTOBUF_VERSION="${1}"
 fi
@@ -19,7 +19,7 @@ git clone https://github.com/protocolbuffers/protobuf.git --branch "v${PROTOBUF_
 pushd protobuf
 cmake -H. -B build \
   -D BUILD_SHARED_LIBS=ON \
-  -D CMAKE_CXX_STANDARD=17 \
+  -D CMAKE_CXX_STANDARD=11 \
   -D CMAKE_BUILD_TYPE=Release \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
   -D CMAKE_POSITION_INDEPENDENT_CODE=ON \

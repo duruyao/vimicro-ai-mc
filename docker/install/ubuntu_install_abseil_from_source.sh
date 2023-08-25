@@ -5,7 +5,7 @@ set -e
 set -u
 set -o pipefail
 
-ABSEIL_VERSION="20230802.0"
+ABSEIL_VERSION="20220623.0"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   ABSEIL_VERSION="${1}"
 fi
@@ -17,7 +17,7 @@ git clone https://github.com/abseil/abseil-cpp --branch "${ABSEIL_VERSION}" --de
 pushd abseil-cpp
 cmake -H. -B build \
   -D BUILD_SHARED_LIBS=ON \
-  -D CMAKE_CXX_STANDARD=17 \
+  -D CMAKE_CXX_STANDARD=11 \
   -D CMAKE_BUILD_TYPE=Release \
   -D ABSL_ENABLE_INSTALL=ON \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
