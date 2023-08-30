@@ -39,8 +39,8 @@ RUN bash /install/ubuntu_install_torch_gpu.sh
 COPY install/ubuntu_install_opencv3_from_source.sh /install/ubuntu_install_opencv3_from_source.sh
 RUN bash /install/ubuntu_install_opencv3_from_source.sh
 
-COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
-RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
+#COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
+#RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
 
 COPY install/ubuntu_install_abseil_from_source.sh /install/ubuntu_install_abseil_from_source.sh
 RUN bash /install/ubuntu_install_abseil_from_source.sh
