@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 
-# tag:
+# tag: v0.9.3
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
