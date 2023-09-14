@@ -53,6 +53,7 @@ RUN bash /install/ubuntu_install_extra.sh
 
 COPY install/ubuntu_install_onnx_modifier_from_source.sh /install/ubuntu_install_onnx_modifier_from_source.sh
 RUN bash /install/ubuntu_install_onnx_modifier_from_source.sh
+COPY utils/onnx-modifier.sh /usr/local/bin/onnx-modifier
 
 ENV SHELL="/usr/bin/zsh"
 COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh

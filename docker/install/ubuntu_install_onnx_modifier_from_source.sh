@@ -25,13 +25,3 @@ cp -rf templates /
 popd
 
 popd
-echo "#\!/usr/bin/env bash
-
-set -euo pipefail
-
-pushd /
-source /opt/onnx-modifier/venv/bin/activate
-python3 app.py --host='0.0.0.0' --port=80 --debug=True
-deactivate
-popd
-" >/bin/onnx-modifier && chmod +x /bin/onnx-modifier
