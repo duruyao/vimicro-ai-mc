@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+pip3 install --no-cache-dir nvidia-pyindex
+
 pip3 install --no-cache-dir \
   scikit-image \
   lmdb \
@@ -13,4 +15,5 @@ pip3 install --no-cache-dir \
   dill \
   openpyxl \
   numpy \
-  pillow
+  pillow \
+  onnx-graphsurgeon
