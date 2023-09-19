@@ -15,11 +15,11 @@ RUN bash /install/ubuntu_install_core.sh
 COPY install/ubuntu_install_dev_tools.sh /install/ubuntu_install_dev_tools.sh
 RUN bash /install/ubuntu_install_dev_tools.sh
 
-COPY install/ubuntu_install_cmake_from_source.sh /install/ubuntu_install_cmake_from_source.sh
-RUN bash /install/ubuntu_install_cmake_from_source.sh
+COPY install/ubuntu_install_cmake.sh /install/ubuntu_install_cmake.sh
+RUN bash /install/ubuntu_install_cmake.sh
 
-COPY install/ubuntu_install_python3_from_source.sh /install/ubuntu_install_python3_from_source.sh
-RUN bash /install/ubuntu_install_python3_from_source.sh "3.9.17"
+COPY install/ubuntu_install_python3.sh /install/ubuntu_install_python3.sh
+RUN bash /install/ubuntu_install_python3.sh
 
 COPY install/ubuntu_install_tensorflow_aarch64.sh /install/ubuntu_install_tensorflow_aarch64.sh
 RUN bash /install/ubuntu_install_tensorflow_aarch64.sh
@@ -33,25 +33,17 @@ RUN bash /install/ubuntu_install_onnx.sh
 COPY install/ubuntu_install_torch.sh /install/ubuntu_install_torch.sh
 RUN bash /install/ubuntu_install_torch.sh
 
-#COPY install/ubuntu_install_opencv3_from_source.sh /install/ubuntu_install_opencv3_from_source.sh
-#RUN bash /install/ubuntu_install_opencv3_from_source.sh
+#COPY install/ubuntu_install_opencv3.sh /install/ubuntu_install_opencv3.sh
+#RUN bash /install/ubuntu_install_opencv3.sh
 
-#COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
-#RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
+COPY install/ubuntu_install_boost.sh /install/ubuntu_install_boost.sh
+RUN bash /install/ubuntu_install_boost.sh
 
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh
 
 COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
 RUN bash /install/ubuntu_install_extra.sh
-
-ENV SHELL="/usr/bin/zsh"
-COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
-RUN bash /install/ubuntu_install_zsh.sh
-
-ENV LANG=C.UTF-8
-COPY install/ubuntu_install_vim.sh /install/ubuntu_install_vim.sh
-RUN bash /install/ubuntu_install_vim.sh
 
 ENV VIMICRO_CAFFE_COMMIT_SHA="e194fbd58cefec2092a369bc8b9f96f14dbf1932"
 COPY sdk/linux/arm64/v8/caffe /opt/caffe
@@ -62,19 +54,10 @@ COPY sdk/linux/arm64/v8/mc /opt/mc
 
 COPY utils/usage.sh /usr/local/bin/usage
 
-ARG HOME="/root"
-COPY conf/.vimrc "${HOME}"/.vimrc
-COPY conf/.zshrc "${HOME}"/.zshrc
-COPY conf/.bashrc "${HOME}"/.bashrc
-COPY conf/.tmux.conf "${HOME}"/.tmux.conf
-
-ARG PY3_VERSION="$(python3 --version | awk '{print $2}')"
-ARG PY3_MAJOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f1)"
-ARG PY3_MINOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f2)"
-ARG PY3_PATCH_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f3)"
-ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
+COPY conf/root.bashrc /conf/root.bashrc
+RUN cat /conf/root.bashrc >> /root/.bashrc
 
 ENV MCHOME="/opt/mc"
-ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
-ENV LD_LIBRARY_PATH="${MCHOME}/toolchain/caffe/build/lib:${LD_LIBRARY_PATH}"
-ENV LD_PRELOAD="/usr/local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages/torch/lib/libgomp-d22c30c5.so.1 ${LD_PRELOAD}"
+ENV PYTHONPATH="$MCHOME/toolchain/caffe/python:$PYTHONPATH"
+ENV LD_LIBRARY_PATH="$MCHOME/toolchain/caffe/build/lib:$LD_LIBRARY_PATH"
+ENV LD_PRELOAD="/usr/local/lib/python3.7/dist-packages/torch/lib/libgomp-d22c30c5.so.1 $LD_PRELOAD"
