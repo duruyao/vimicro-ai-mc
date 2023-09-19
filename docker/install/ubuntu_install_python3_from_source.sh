@@ -20,8 +20,13 @@ apt-get update && apt-install-and-clear -y --no-install-recommends \
   libreadline-dev \
   libffi-dev \
   libsqlite3-dev \
-  wget \
-  libbz2-dev
+  libbz2-dev \
+  libc6-dev \
+  tk-dev \
+  lzma \
+  lzma-dev \
+  liblzma-dev \
+  wget
 
 mkdir -p /install/ubuntu_install_python3_from_source
 pushd /install/ubuntu_install_python3_from_source
@@ -29,7 +34,7 @@ pushd /install/ubuntu_install_python3_from_source
 wget "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz"
 tar -xf "Python-${PYTHON_VERSION}.tar.xz"
 pushd "Python-${PYTHON_VERSION}"
-./configure CFLAGS="-fPIC" --enable-optimizations --enable-shared --with-computed-gotos --prefix=/usr
+./configure CFLAGS="-fPIC" --enable-optimizations --enable-shared --prefix=/usr
 make -j $(($(nproc) - 1))
 make altinstall
 popd
