@@ -11,10 +11,10 @@ set -o pipefail
 # tail -f nohup-cpu.out
 # tail -f nohup-cpu_arm.out
 
-docker build -t duruyao/vimicro-mc:gpu -f Dockerfile.gpu --load . --progress plain >nohup-gpu.out 2>&1
+docker build --build-arg BUILD_DATE="$(TZ=UTC-8 date "+%Y-%m-%dT%H:%M:%S+08:00")" -t duruyao/vimicro-mc:gpu -f Dockerfile.gpu --load . --progress plain >nohup-gpu.out 2>&1
 docker push duruyao/vimicro-mc:gpu
 
-docker build -t duruyao/vimicro-mc:cpu -f Dockerfile.cpu --load . --progress plain >nohup-cpu.out 2>&1
+docker build --build-arg BUILD_DATE="$(TZ=UTC-8 date "+%Y-%m-%dT%H:%M:%S+08:00")" -t duruyao/vimicro-mc:cpu -f Dockerfile.cpu --load . --progress plain >nohup-cpu.out 2>&1
 docker push duruyao/vimicro-mc:cpu
 
 docker buildx create --use --name insecure-builder --buildkitd-flags "--allow-insecure-entitlement security.insecure" || true

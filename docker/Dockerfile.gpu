@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 
-# tag: v0.9.3
+# tag: v0.9.4
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
@@ -95,3 +95,10 @@ ENV C_INCLUDE_PATH="/usr/local/cuda/include:${C_INCLUDE_PATH}"
 ENV CPLUS_INCLUDE_PATH="/usr/local/cuda/include:${CPLUS_INCLUDE_PATH}"
 ENV LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda/compat:${LIBRARY_PATH}"
 ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/usr/local/cuda/lib64:/usr/local/cuda/compat:${LD_LIBRARY_PATH}"
+
+ENV THIS_DOCKER_REPOSITORY="https://hub.docker.com/repository/docker/duruyao/vimicro-mc"
+ENV THIS_DOCKER_TAG="gpu"
+ARG BUILD_DATE
+ENV THIS_DOCKER_CREATED="${BUILD_DATE}"
+ENV THIS_GIT_REPOSITORY="https://github.com/duruyao/vimicro-ai-mc"
+ENV THIS_GIT_TAG="v0.9.4"
