@@ -1,10 +1,10 @@
-FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 # tag: v0.9.4
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
 RUN rm -f /etc/apt/sources.list.d/nvidia-ml.list && apt-get clean
 
 RUN apt-get update --fix-missing
@@ -18,11 +18,11 @@ RUN bash /install/ubuntu_install_core.sh
 COPY install/ubuntu_install_dev_tools.sh /install/ubuntu_install_dev_tools.sh
 RUN bash /install/ubuntu_install_dev_tools.sh
 
-COPY install/ubuntu_install_cmake_from_source.sh /install/ubuntu_install_cmake_from_source.sh
-RUN bash /install/ubuntu_install_cmake_from_source.sh
+#COPY install/ubuntu_install_cmake_from_source.sh /install/ubuntu_install_cmake_from_source.sh
+#RUN bash /install/ubuntu_install_cmake_from_source.sh
 
-COPY install/ubuntu_install_python3_from_source.sh /install/ubuntu_install_python3_from_source.sh
-RUN bash /install/ubuntu_install_python3_from_source.sh "3.9.17"
+COPY install/ubuntu_install_python3.sh /install/ubuntu_install_python3.sh
+RUN bash /install/ubuntu_install_python3.sh "3.9"
 
 COPY install/ubuntu_install_tensorflow_gpu.sh /install/ubuntu_install_tensorflow_gpu.sh
 RUN bash /install/ubuntu_install_tensorflow_gpu.sh
@@ -36,17 +36,17 @@ RUN bash /install/ubuntu_install_onnx_gpu.sh
 COPY install/ubuntu_install_torch_gpu.sh /install/ubuntu_install_torch_gpu.sh
 RUN bash /install/ubuntu_install_torch_gpu.sh
 
-COPY install/ubuntu_install_opencv3_from_source.sh /install/ubuntu_install_opencv3_from_source.sh
-RUN bash /install/ubuntu_install_opencv3_from_source.sh
+#COPY install/ubuntu_install_opencv3_from_source.sh /install/ubuntu_install_opencv3_from_source.sh
+#RUN bash /install/ubuntu_install_opencv3_from_source.sh
 
 #COPY install/ubuntu_install_boost_from_source.sh /install/ubuntu_install_boost_from_source.sh
 #RUN bash /install/ubuntu_install_boost_from_source.sh "1.67.0" "3.9"
 
-COPY install/ubuntu_install_abseil_from_source.sh /install/ubuntu_install_abseil_from_source.sh
-RUN bash /install/ubuntu_install_abseil_from_source.sh
+#COPY install/ubuntu_install_abseil_from_source.sh /install/ubuntu_install_abseil_from_source.sh
+#RUN bash /install/ubuntu_install_abseil_from_source.sh
 
-COPY install/ubuntu_install_protobuf_from_source.sh /install/ubuntu_install_protobuf_from_source.sh
-RUN bash /install/ubuntu_install_protobuf_from_source.sh
+#COPY install/ubuntu_install_protobuf_from_source.sh /install/ubuntu_install_protobuf_from_source.sh
+#RUN bash /install/ubuntu_install_protobuf_from_source.sh
 
 COPY install/ubuntu_install_caffe_deps.sh /install/ubuntu_install_caffe_deps.sh
 RUN bash /install/ubuntu_install_caffe_deps.sh
