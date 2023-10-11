@@ -16,4 +16,5 @@ pip3 install --no-cache-dir \
   openpyxl \
   numpy \
   pillow \
-  onnx-graphsurgeon
+  onnx-graphsurgeon \
+  onnx-simplifier
