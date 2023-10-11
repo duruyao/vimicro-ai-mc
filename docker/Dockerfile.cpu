@@ -63,14 +63,7 @@ ENV LANG=C.UTF-8
 COPY install/ubuntu_install_vim.sh /install/ubuntu_install_vim.sh
 RUN bash /install/ubuntu_install_vim.sh
 
-#ENV VIMICRO_CAFFE_COMMIT_SHA="e194fbd58cefec2092a369bc8b9f96f14dbf1932"
-#COPY sdk/linux/arm64/v8/caffe /opt/caffe
-
-#ENV VIMICRO_VC0768_COMMIT_SHA="c89088ac0c6f40d710982c7b7bebd58c6eb8fb1c"
-#ENV VIMICRO_PTO2CAFFE_COMMIT_SHA="79b4153143af10a09d4c4d3e5d821566be048060"
-#COPY sdk/linux/amd64/mc /opt/mc
-
-#COPY utils/usage.sh /usr/local/bin/usage
+RUN git config --global --add safe.directory "*"
 
 ARG HOME="/root"
 COPY conf/.vimrc "${HOME}"/.vimrc
@@ -83,9 +76,6 @@ ARG PY3_MAJOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f1)"
 ARG PY3_MINOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f2)"
 ARG PY3_PATCH_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f3)"
 ARG PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
-
-#ENV MCHOME="/opt/mc"
-#ENV PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
 
 ENV THIS_DOCKER_REPOSITORY="https://hub.docker.com/repository/docker/duruyao/vimicro-mc"
 ENV THIS_DOCKER_TAG="cpu"
