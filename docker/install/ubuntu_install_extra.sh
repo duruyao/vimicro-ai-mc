@@ -17,4 +17,5 @@ pip3 install --no-cache-dir \
   numpy \
   pillow \
   onnx-graphsurgeon \
-  onnx-simplifier
+  onnx-simplifier \
+  opencv-python
