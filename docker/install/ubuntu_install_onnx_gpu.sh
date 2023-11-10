@@ -6,6 +6,6 @@ set -u
 set -o pipefail
 
 pip3 install --no-cache-dir \
-  onnx==1.14.1 \
-  onnxruntime-gpu==1.15.1 \
+  onnx==1.15.0 \
+  onnxruntime-gpu==1.16.2 \
   onnxoptimizer==0.3.13

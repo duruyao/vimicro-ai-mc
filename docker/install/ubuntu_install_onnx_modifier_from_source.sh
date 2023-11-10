@@ -18,7 +18,7 @@ python3 -m venv "venv"
 source venv/bin/activate
 pip3 install -r requirements.txt
 deactivate
-cp -rf *.py /
+cp -rf ./*.py /
 cp -rf utils /
 cp -rf static /
 cp -rf templates /
