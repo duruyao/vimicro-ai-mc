@@ -11,7 +11,7 @@ set -o pipefail
 # tail -f nohup-cpu.out
 # tail -f nohup-cpu_arm.out
 
-BUILD_TAG="v0.9.5"
+BUILD_TAG="v0.9.6"
 
 docker build \
   --build-arg BUILD_TAG="${BUILD_TAG}" \

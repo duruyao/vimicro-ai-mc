@@ -1,6 +1,6 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
-# tag: v0.9.5
+# tag: v0.9.6
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
