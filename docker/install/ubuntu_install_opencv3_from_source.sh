@@ -15,8 +15,8 @@ fi
 mkdir -p /install/ubuntu_install_opencv3_from_source
 pushd /install/ubuntu_install_opencv3_from_source
 
-git clone https://github.com/opencv/opencv_contrib.git --branch "${OPENCV_VERSION}" --depth 1
-git clone https://github.com/opencv/opencv.git --branch "${OPENCV_VERSION}" --depth 1
+git clone --branch "${OPENCV_VERSION}" --recurse-submodules --depth 1 https://github.com/opencv/opencv_contrib.git
+git clone --branch "${OPENCV_VERSION}" --recurse-submodules --depth 1 https://github.com/opencv/opencv.git
 pushd opencv
 cmake -S . -B build \
   -D CMAKE_CXX_STANDARD=11 \

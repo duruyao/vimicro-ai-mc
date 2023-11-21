@@ -15,7 +15,7 @@ fi
 mkdir -p /install/ubuntu_install_abseil_from_source
 pushd /install/ubuntu_install_abseil_from_source
 
-git clone https://github.com/abseil/abseil-cpp --branch "${ABSEIL_VERSION}" --depth 1
+git clone --branch "${ABSEIL_VERSION}" --recurse-submodules --depth 1 https://github.com/abseil/abseil-cpp
 pushd abseil-cpp
 cmake -S . -B build \
   -D BUILD_SHARED_LIBS=ON \

@@ -17,7 +17,7 @@ apt-get remove -y --purge protobuf-compiler libprotobuf-dev && true
 mkdir -p /install/ubuntu_install_protobuf_from_source
 pushd /install/ubuntu_install_protobuf_from_source
 
-git clone https://github.com/protocolbuffers/protobuf.git --branch "v${PROTOBUF_VERSION}" --recurse-submodules --depth 1
+git clone --branch "v${PROTOBUF_VERSION}" --recurse-submodules --depth 1 https://github.com/protocolbuffers/protobuf.git
 pushd protobuf
 cmake -S . -B build \
   -D BUILD_SHARED_LIBS=ON \

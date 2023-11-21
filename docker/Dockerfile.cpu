@@ -54,6 +54,7 @@ RUN bash /install/ubuntu_install_llvm.sh 15 16 17
 COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
 RUN bash /install/ubuntu_install_extra.sh
 
+ENV ONNX_MODIFIER_HOME="/opt/onnx-modifier"
 COPY install/ubuntu_install_onnx_modifier_from_source.sh /install/ubuntu_install_onnx_modifier_from_source.sh
 RUN bash /install/ubuntu_install_onnx_modifier_from_source.sh
 COPY utils/onnx-modifier.sh /usr/local/bin/onnx-modifier

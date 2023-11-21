@@ -15,9 +15,8 @@ fi
 mkdir -p /install/ubuntu_install_cmake_from_source
 pushd /install/ubuntu_install_cmake_from_source
 
-wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz"
-tar -zxvf "cmake-${CMAKE_VERSION}.tar.gz"
-pushd "cmake-${CMAKE_VERSION}"
+git clone --branch "v${CMAKE_VERSION}" --recurse-submodules --depth 1 https://github.com/Kitware/CMake
+pushd CMake
 chmod +x ./bootstrap
 ./bootstrap --prefix=/usr/local
 make -j $(($(nproc) - 1))
