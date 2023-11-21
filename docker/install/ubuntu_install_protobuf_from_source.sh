@@ -19,7 +19,7 @@ pushd /install/ubuntu_install_protobuf_from_source
 
 git clone https://github.com/protocolbuffers/protobuf.git --branch "v${PROTOBUF_VERSION}" --recurse-submodules --depth 1
 pushd protobuf
-cmake -H. -B build \
+cmake -S . -B build \
   -D BUILD_SHARED_LIBS=ON \
   -D CMAKE_CXX_STANDARD=11 \
   -D CMAKE_BUILD_TYPE=Release \

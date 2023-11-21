@@ -17,7 +17,7 @@ pushd /install/ubuntu_install_abseil_from_source
 
 git clone https://github.com/abseil/abseil-cpp --branch "${ABSEIL_VERSION}" --depth 1
 pushd abseil-cpp
-cmake -H. -B build \
+cmake -S . -B build \
   -D BUILD_SHARED_LIBS=ON \
   -D CMAKE_CXX_STANDARD=11 \
   -D CMAKE_BUILD_TYPE=Release \
