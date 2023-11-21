@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0}
+
 pip3 install --upgrade --no-cache-dir \
   "Pygments>=2.4.0" \
   attrs \

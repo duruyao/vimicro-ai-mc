@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0} [PROTOBUF_VERSION]
+
 PROTOBUF_VERSION="21.1"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   PROTOBUF_VERSION="${1}"

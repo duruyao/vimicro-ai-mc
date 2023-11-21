@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0} [BOOST_VERSION] [PYTHON_VERSION]
+
 BOOST_VERSION="1.67.0"
 BOOST_TAR_NAME="boost_1_67_0"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then

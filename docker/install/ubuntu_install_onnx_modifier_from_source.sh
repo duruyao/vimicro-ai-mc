@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0} [ONNX_MODIFIER_VERSION]
+
 ONNX_MODIFIER_VERSION="master"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   ONNX_MODIFIER_VERSION="${1}"

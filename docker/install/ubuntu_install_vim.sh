@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0}
+
 apt-get update && apt-install-and-clear -y --no-install-recommends \
   curl \
   git \

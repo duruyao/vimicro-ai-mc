@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0}
+
 pip3 install --no-cache-dir future
 
 pip3 install --no-cache-dir \

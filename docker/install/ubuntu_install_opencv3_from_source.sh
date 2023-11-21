@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0} [OPENCV_VERSION]
+
 OPENCV_VERSION="3.4.2"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   OPENCV_VERSION="${1}"

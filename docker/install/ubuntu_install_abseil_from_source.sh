@@ -5,6 +5,8 @@ set -e
 set -u
 set -o pipefail
 
+# usage: bash ${0} [ABSEIL_VERSION]
+
 ABSEIL_VERSION="20220623.0"
 if [ "${1:-"DEFAULT_VALUE"}" != "DEFAULT_VALUE" ]; then
   ABSEIL_VERSION="${1}"
