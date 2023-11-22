@@ -61,6 +61,9 @@ COPY install/ubuntu_install_tvm_from_source.sh /install/ubuntu_install_tvm_from_
 RUN bash /install/ubuntu_install_tvm_from_source.sh
 COPY utils/tvmc.sh /usr/local/bin/tvmc
 
+COPY install/ubuntu_install_paddlepaddle.sh /install/ubuntu_install_paddlepaddle.sh
+RUN bash /install/ubuntu_install_paddlepaddle.sh
+
 ENV ONNX_MODIFIER_HOME="/opt/onnx-modifier"
 COPY install/ubuntu_install_onnx_modifier_from_source.sh /install/ubuntu_install_onnx_modifier_from_source.sh
 RUN bash /install/ubuntu_install_onnx_modifier_from_source.sh
