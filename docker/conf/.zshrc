@@ -109,11 +109,7 @@ PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 
 export PATH="${HOME}/.local/bin:${PATH}"
 export PYTHONPATH="${HOME}/.local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages:${PYTHONPATH}"
-# export MCHOME="/opt/mc"
-# export PYTHONPATH="${MCHOME}/toolchain/caffe/python:${PYTHONPATH}"
-# export LD_LIBRARY_PATH="${MCHOME}/toolchain/caffe/build/lib:${LD_LIBRARY_PATH}"
-# export LD_PRELOAD="/usr/local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages/torch/lib/libgomp-d22c30c5.so.1 ${LD_PRELOAD}"
+
 alias ll="ls -alFh"
-# alias pto2caffe="python3 ${MCHOME}/toolchain/pto2caffe/convert.pyc"
-# alias caffe2npu="python3 ${MCHOME}/toolchain/caffe2npu/model_converter.pyc"
+
 PROMPT="%B%F{magenta}[mc]%f%F{yellow}[%n%f%F{red}@%f%F{yellow}%M%f:%F{blue}%~%f%F{yellow}]%f$%b "

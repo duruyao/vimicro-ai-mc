@@ -51,13 +51,23 @@ RUN bash /install/ubuntu_install_caffe_deps.sh
 COPY install/ubuntu_install_llvm.sh /install/ubuntu_install_llvm.sh
 RUN bash /install/ubuntu_install_llvm.sh 15 16 17
 
-COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
-RUN bash /install/ubuntu_install_extra.sh
+ENV TVM_HOME="/opt/tvm"
+ENV TVM_PYTHON_VERSION="3.9"
+ENV PYTHONPATH="${TVM_HOME}/python:${PYTHONPATH}"
+ARG TVM_BUILD_USE_LLVM="ON"
+ARG TVM_BUILD_USE_CUDA="OFF"
+ARG TVM_BUILD_USE_CUDNN="OFF"
+COPY install/ubuntu_install_tvm_from_source.sh /install/ubuntu_install_tvm_from_source.sh
+RUN bash /install/ubuntu_install_tvm_from_source.sh
+COPY utils/tvmc.sh /usr/local/bin/tvmc
 
 ENV ONNX_MODIFIER_HOME="/opt/onnx-modifier"
 COPY install/ubuntu_install_onnx_modifier_from_source.sh /install/ubuntu_install_onnx_modifier_from_source.sh
 RUN bash /install/ubuntu_install_onnx_modifier_from_source.sh
 COPY utils/onnx-modifier.sh /usr/local/bin/onnx-modifier
+
+COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
+RUN bash /install/ubuntu_install_extra.sh
 
 ENV SHELL="/usr/bin/zsh"
 COPY install/ubuntu_install_zsh.sh /install/ubuntu_install_zsh.sh
