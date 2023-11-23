@@ -9,4 +9,4 @@ set -o pipefail
 
 pip3 install --no-cache-dir \
   paddlepaddle==2.5.2 \
-  paddleocr==2.7.0.3
+  paddleocr==2.7.0.3 --ignore-installed
