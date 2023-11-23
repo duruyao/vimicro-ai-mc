@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-# tag: v0.9.6
+# tag: v0.9.7
 
 COPY utils/apt-install-and-clear.sh /usr/local/bin/apt-install-and-clear
 
