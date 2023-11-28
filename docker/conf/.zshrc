@@ -108,7 +108,6 @@ PY3_PATCH_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f3)"
 PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 
 export PATH="${HOME}/.local/bin:${PATH}"
-export PYTHONPATH="${HOME}/.local/lib/python${PY3_MAJOR_MINOR_VERSION}/dist-packages:${PYTHONPATH}"
 
 alias ll="ls -alFh"
 
