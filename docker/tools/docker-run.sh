@@ -4,7 +4,9 @@ set -e
 set -u
 set -o pipefail
 
-function get_random_port() {
+# usage: bash docker-run.sh [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+function get_valid_port() {
   local random_port
   random_port="$(shuf -i 1024-49151 -n 1)"
   if [ -n "$(command -v netstat)" ]; then
@@ -21,7 +23,7 @@ COMMAND_ARGS=()
 
 while ((${#})); do
   repository_tag="$(docker inspect --format "{{.RepoTags}}" "${1}" 2>/dev/null || true)"
-  if [ ${#repository_tag} -le 2 ]; then
+  if [ -z "${repository_tag}" ] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
     OPTIONS+=("${1}")
     shift 1
   else
@@ -32,18 +34,19 @@ while ((${#})); do
   fi
 done
 
-CONTAINER_USER_HOME="/${USER}"
-CONTAINER_CACHE_DIR="${HOME}/.docker_cache/$(docker images --format "{{.ID}}" "${IMAGE[*]}")"
+if [ -n "${IMAGE[*]}" ]; then
+  CONTAINER_HOME="/${USER}"
+  HOST_CACHE_DIR="${HOME}/.docker_cache/$(docker images --format "{{.ID}}" "${IMAGE[*]}")"
 
-mkdir -p "${CONTAINER_CACHE_DIR}/login"
-mkdir -p "${CONTAINER_CACHE_DIR}/${CONTAINER_USER_HOME}/.local"
+  mkdir -p "${HOST_CACHE_DIR}/login"
+  mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local"
 
-echo "
+  echo "
 #!/usr/bin/env bash
 
 set -e
 
-COMMAND=(\"\${@}\")
+COMMAND_ARGS=(\"\${@}\")
 
 {
   useradd -ms /bin/bash -d \"\${THIS_BUILD_HOME}\" \"\${THIS_BUILD_USER}\"
@@ -70,32 +73,37 @@ COMMAND=(\"\${@}\")
   service ssh start || true
 } 1>/login.log 2>&1
 
-sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" \"\${COMMAND[@]}\"
+sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" PYTHONPATH=\"\${PYTHONPATH}\" \"\${COMMAND_ARGS[@]}\"
 
-" >"${CONTAINER_CACHE_DIR}/login/with-the-same-user.sh"
+" >"${HOST_CACHE_DIR}/login/with-the-same-user.sh"
 
-DOCKER_ENV+=(
-  --env THIS_BUILD_USER="$(id -u -n)"
-  --env THIS_BUILD_UID="$(id -u)"
-  --env THIS_BUILD_GROUP="$(id -g -n)"
-  --env THIS_BUILD_GID="$(id -g)"
-  --env THIS_BUILD_HOME="${CONTAINER_USER_HOME}"
-  --env https_proxy="http://10.0.13.122:3128"
-  --env HTTPS_PROXY="http://10.0.13.122:3128"
-  --env http_proxy="http://10.0.13.122:3128"
-  --env HTTP_PROXY="http://10.0.13.122:3128"
-  --env all_proxy="socks5://10.0.13.122:3128"
-  --env ALL_PROXY="socks5://10.0.13.122:3128"
-)
+  DOCKER_ENV+=(
+    --env THIS_BUILD_USER="$(id -u -n)"
+    --env THIS_BUILD_UID="$(id -u)"
+    --env THIS_BUILD_GROUP="$(id -g -n)"
+    --env THIS_BUILD_GID="$(id -g)"
+    --env THIS_BUILD_HOME="${CONTAINER_HOME}"
+    --env https_proxy="http://10.0.13.122:3128"
+    --env HTTPS_PROXY="http://10.0.13.122:3128"
+    --env http_proxy="http://10.0.13.122:3128"
+    --env HTTP_PROXY="http://10.0.13.122:3128"
+    --env all_proxy="socks5://10.0.13.122:3128"
+    --env ALL_PROXY="socks5://10.0.13.122:3128"
+  )
 
-DOCKER_MOUNT+=(
-  --volume "${CONTAINER_CACHE_DIR}/login:/login"
-  --volume "${CONTAINER_CACHE_DIR}/${CONTAINER_USER_HOME}/.local:${CONTAINER_USER_HOME}/.local"
-)
+  DOCKER_MOUNT+=(
+    --volume "${HOST_CACHE_DIR}/login:/login"
+    --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local:${CONTAINER_HOME}/.local"
+  )
 
-DOCKER_PUBLISH+=(
-  "--publish" "$(get_random_port):22"
-)
+  DOCKER_PUBLISH+=(
+    --publish "$(get_valid_port):22"
+  )
+
+  DOCKER_LOGIN+=(
+    bash --login /login/with-the-same-user.sh
+  )
+fi
 
 DOCKER_CMD=(docker run
   ${OPTIONS[@]+"${OPTIONS[@]}"}
@@ -103,12 +111,12 @@ DOCKER_CMD=(docker run
   ${DOCKER_MOUNT[@]+"${DOCKER_MOUNT[@]}"}
   ${DOCKER_PUBLISH[@]+"${DOCKER_PUBLISH[@]}"}
   ${IMAGE[@]+"${IMAGE[@]}"}
-  bash --login /login/with-the-same-user.sh
+  ${DOCKER_LOGIN[@]+"${DOCKER_LOGIN[@]}"}
   ${COMMAND_ARGS[@]+"${COMMAND_ARGS[@]}"}
 )
 
-echo ""
-echo ${DOCKER_CMD[@]+"${DOCKER_CMD[@]}"}
-echo ""
+echo -e "\033[7m"
+echo -e ${DOCKER_CMD[@]+"${DOCKER_CMD[@]}"}
+echo -e "\033[0m"
 
 ${DOCKER_CMD[@]+"${DOCKER_CMD[@]}"}

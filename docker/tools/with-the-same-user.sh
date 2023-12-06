@@ -2,7 +2,7 @@
 
 set -e
 
-COMMAND=("${@}")
+COMMAND_ARGS=("${@}")
 
 {
   useradd -ms /bin/bash -d "${THIS_BUILD_HOME}" "${THIS_BUILD_USER}"
@@ -29,4 +29,4 @@ COMMAND=("${@}")
   service ssh start || true
 } 1>/login.log 2>&1
 
-sudo -u "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" "${COMMAND[@]}"
+sudo -u "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" PYTHONPATH="${PYTHONPATH}" "${COMMAND_ARGS[@]}"
