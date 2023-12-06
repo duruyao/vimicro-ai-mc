@@ -40,6 +40,8 @@ if [ -n "${IMAGE[*]}" ]; then
 
   mkdir -p "${HOST_CACHE_DIR}/login"
   mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local"
+  if [ -d "${HOME}/.ssh" ]; then cp -rf "${HOME}/.ssh" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.ssh"; fi
+  if [ -d "${HOME}/.gitconfig" ]; then cp -rf "${HOME}/.gitconfig" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.gitconfig"; fi
 
   echo "
 #!/usr/bin/env bash
@@ -66,7 +68,6 @@ COMMAND_ARGS=(\"\${@}\")
   cp -rf /root/.zprofile \"\${THIS_BUILD_HOME}\"/.zprofile || true
   cp -rf /root/.oh-my-zsh \"\${THIS_BUILD_HOME}\"/.oh-my-zsh || true
   cp -rf /root/.tmux.conf \"\${THIS_BUILD_HOME}\"/.tmux.conf || true
-  cp -rf /root/.gitconfig \"\${THIS_BUILD_HOME}\"/.gitconfig || true
 
   chown -R \"\${THIS_BUILD_USER}\":\"\${THIS_BUILD_USER}\" \"\${THIS_BUILD_HOME}\"
 
@@ -94,6 +95,8 @@ sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" PYTH
   DOCKER_MOUNT+=(
     --volume "${HOST_CACHE_DIR}/login:/login"
     --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local:${CONTAINER_HOME}/.local"
+    --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.ssh:${CONTAINER_HOME}/.ssh"
+    --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.gitconfig:${CONTAINER_HOME}/.gitconfig"
   )
 
   DOCKER_PUBLISH+=(

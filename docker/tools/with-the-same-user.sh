@@ -22,7 +22,6 @@ COMMAND_ARGS=("${@}")
   cp -rf /root/.zprofile "${THIS_BUILD_HOME}"/.zprofile || true
   cp -rf /root/.oh-my-zsh "${THIS_BUILD_HOME}"/.oh-my-zsh || true
   cp -rf /root/.tmux.conf "${THIS_BUILD_HOME}"/.tmux.conf || true
-  cp -rf /root/.gitconfig "${THIS_BUILD_HOME}"/.gitconfig || true
 
   chown -R "${THIS_BUILD_USER}":"${THIS_BUILD_USER}" "${THIS_BUILD_HOME}"
 
