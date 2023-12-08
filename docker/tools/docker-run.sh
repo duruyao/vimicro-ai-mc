@@ -40,8 +40,8 @@ if [ -n "${IMAGE[*]}" ]; then
 
   mkdir -p "${HOST_CACHE_DIR}/login"
   mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local"
-  if [ -d "${HOME}/.ssh" ]; then cp -rf "${HOME}/.ssh" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.ssh"; fi
-  if [ -d "${HOME}/.gitconfig" ]; then cp -rf "${HOME}/.gitconfig" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.gitconfig"; fi
+  if [ -d "${HOME}/.ssh" ]; then cp -rf "${HOME}/.ssh" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/"; fi
+  if [ -f "${HOME}/.gitconfig" ]; then cp -f "${HOME}/.gitconfig" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/"; fi
 
   echo "
 #!/usr/bin/env bash
