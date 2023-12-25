@@ -42,6 +42,9 @@ if [ -n "${IMAGE[*]}" ]; then
   mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local"
   if [ -d "${HOME}/.ssh" ]; then cp -rf "${HOME}/.ssh" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/"; fi
   if [ -f "${HOME}/.gitconfig" ]; then cp -f "${HOME}/.gitconfig" "${HOST_CACHE_DIR}/${CONTAINER_HOME}/"; fi
+  mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.go/bin"
+  mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.go/pkg"
+  mkdir -p "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.go/src"
 
   echo "
 #!/usr/bin/env bash
@@ -90,6 +93,7 @@ sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" PYTH
     --env HTTP_PROXY="http://10.0.13.122:3128"
     --env all_proxy="socks5://10.0.13.122:3128"
     --env ALL_PROXY="socks5://10.0.13.122:3128"
+    --env GOPATH="${CONTAINER_HOME}/.go"
   )
 
   DOCKER_MOUNT+=(
@@ -97,6 +101,7 @@ sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" PYTH
     --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.local:${CONTAINER_HOME}/.local"
     --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.ssh:${CONTAINER_HOME}/.ssh"
     --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.gitconfig:${CONTAINER_HOME}/.gitconfig"
+    --volume "${HOST_CACHE_DIR}/${CONTAINER_HOME}/.go:${CONTAINER_HOME}/.go"
   )
 
   DOCKER_PUBLISH+=(
