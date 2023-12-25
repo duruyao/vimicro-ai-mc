@@ -104,7 +104,13 @@ PY3_MINOR_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f2)"
 PY3_PATCH_VERSION="$(echo "${PY3_VERSION}" | cut -d'.' -f3)"
 PY3_MAJOR_MINOR_VERSION="${PY3_MAJOR_VERSION}.${PY3_MINOR_VERSION}"
 
-export PATH="${HOME}/.local/bin:${PATH}"
+if [[ "${PATH}" != *"${GOPATH}/bin"* ]]; then
+    export PATH="${GOPATH}/bin:${PATH}"
+fi
+
+if [[ "${PATH}" != *"${HOME}/.local/bin"* ]]; then
+    export PATH="${HOME}/.local/bin:${PATH}"
+fi
 
 alias ll="ls -alFh"
 

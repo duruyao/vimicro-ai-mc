@@ -28,4 +28,4 @@ COMMAND_ARGS=("${@}")
   service ssh start || true
 } 1>/login.log 2>&1
 
-sudo -u "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" PYTHONPATH="${PYTHONPATH}" "${COMMAND_ARGS[@]}"
+sudo -u "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" PYTHONPATH="${PYTHONPATH}" PATH="${THIS_BUILD_HOME}/.local/bin:${GOPATH}/bin:${PATH}" "${COMMAND_ARGS[@]}"

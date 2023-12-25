@@ -72,6 +72,11 @@ COPY install/ubuntu_install_onnx_modifier_from_source.sh /install/ubuntu_install
 RUN bash /install/ubuntu_install_onnx_modifier_from_source.sh
 COPY utils/onnx-modifier.sh /usr/local/bin/onnx-modifier
 
+ENV GOROOT="/opt/go"
+ENV PATH="${GOROOT}/bin:${PATH}"
+COPY install/ubuntu_install_golang.sh /install/ubuntu_install_golang.sh
+RUN bash /install/ubuntu_install_golang.sh
+
 COPY install/ubuntu_install_extra.sh /install/ubuntu_install_extra.sh
 RUN bash /install/ubuntu_install_extra.sh
 
