@@ -23,7 +23,7 @@ COMMAND_ARGS=()
 
 while ((${#})); do
   repository_tag="$(docker inspect --format "{{.RepoTags}}" "${1}" 2>/dev/null || true)"
-  if [ -z "${repository_tag}" ] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
+  if [ -z "${repository_tag}" ] || [[ "${1}" =~ ^[0-9]+$ ]] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
     OPTIONS+=("${1}")
     shift 1
   else
