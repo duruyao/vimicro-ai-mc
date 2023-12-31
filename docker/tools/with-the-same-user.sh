@@ -28,4 +28,8 @@ mkdir -p /login
   set +x
 } 1>/login/login.log 2>&1
 
-sudo -u "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" PYTHONPATH="${PYTHONPATH}" PATH="${THIS_BUILD_HOME}/.local/bin:${GOPATH}/bin:${PATH}" "${COMMAND_ARGS[@]}"
+if [ -z "$(command -v sudo)" ]; then
+  su --login "${THIS_BUILD_USER}" --pty --command "export HOME=${THIS_BUILD_HOME} PYTHONPATH=${PYTHONPATH} PATH=${THIS_BUILD_HOME}/.local/bin:${GOPATH}/bin:${PATH}; ${COMMAND_ARGS[*]}"
+else
+  sudo --user "#${THIS_BUILD_UID}" --preserve-env HOME="${THIS_BUILD_HOME}" PYTHONPATH="${PYTHONPATH}" PATH="${THIS_BUILD_HOME}/.local/bin:${GOPATH}/bin:${PATH}" -- "${COMMAND_ARGS[@]}"
+fi
