@@ -8,10 +8,10 @@ set -o pipefail
 
 function get_valid_port() {
   local random_port
-  random_port="$(shuf -i 1024-49151 -n 1)"
+  random_port="$((RANDOM % (49151 - 1024 + 1) + 1024))"
   if [ -n "$(command -v netstat)" ]; then
     while netstat -tuln | grep -q ":${random_port}"; do
-      random_port="$(shuf -i 1024-49151 -n 1)"
+      random_port="$((RANDOM % (49151 - 1024 + 1) + 1024))"
     done
   fi
   echo "${random_port}"
@@ -22,19 +22,19 @@ IMAGE=()
 COMMAND_ARGS=()
 
 while ((${#})); do
-  repository_tag="$(docker inspect --format "{{.RepoTags}}" "${1}" 2>/dev/null || true)"
+  repository_tag="$(docker inspect --format "{{index .RepoTags 0}}" "${1}" 2>/dev/null || true)"
   if [ -z "${repository_tag}" ] || [[ "${1}" =~ ^[0-9]+$ ]] || [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
     OPTIONS+=("${1}")
     shift 1
   else
-    IMAGE+=("${1}")
+    IMAGE+=("${repository_tag}")
     shift 1
     COMMAND_ARGS+=("${@}")
     break
   fi
 done
 
-if [ -n "${IMAGE[*]}" ]; then
+if [ -n "${IMAGE[*]+"NOT EMPTY"}" ]; then
   CONTAINER_HOME="/${USER}"
   HOST_CACHE_DIR="${HOME}/.docker_cache/$(docker images --format "{{.ID}}" "${IMAGE[*]}")"
 
@@ -53,29 +53,29 @@ set -e
 
 COMMAND_ARGS=(\"\${@}\")
 
+mkdir -p /login
+
 {
-  useradd -ms /bin/bash -d \"\${THIS_BUILD_HOME}\" \"\${THIS_BUILD_USER}\"
+  set -x
+  for shell in zsh fish bash sh; do
+    [ -n \"\$(command -v \"\${shell}\")\" ] && custom_shell=\"\$(command -v \"\${shell}\")\" && break
+  done
+
+  useradd -ms \"\${custom_shell-\"/bin/sh\"}\" -d \"\${THIS_BUILD_HOME}\" \"\${THIS_BUILD_USER}\"
   usermod -aG sudo \"\${THIS_BUILD_USER}\"
   echo \"\${THIS_BUILD_USER}\":\"\${THIS_BUILD_USER}\" | chpasswd
   usermod -u \"\${THIS_BUILD_UID}\" \"\${THIS_BUILD_USER}\"
-  groupmod -g \"\${THIS_BUILD_GID}\" \"\${THIS_BUILD_GROUP}\"
+  groupmod -g \"\${THIS_BUILD_GID}\" \"\${THIS_BUILD_GROUP}\" || true
 
-  if [ -n \"\$(command -v zsh)\" ]; then
-    chsh -s \"\$(which zsh)\" \"\${THIS_BUILD_USER}\"
-  fi
-
-  cp -rf /root/.vim \"\${THIS_BUILD_HOME}\"/.vim || true
-  cp -rf /root/.vimrc \"\${THIS_BUILD_HOME}\"/.vimrc || true
-  cp -rf /root/.bashrc \"\${THIS_BUILD_HOME}\"/.bashrc || true
-  cp -rf /root/.zshrc \"\${THIS_BUILD_HOME}\"/.zshrc || true
-  cp -rf /root/.zprofile \"\${THIS_BUILD_HOME}\"/.zprofile || true
-  cp -rf /root/.oh-my-zsh \"\${THIS_BUILD_HOME}\"/.oh-my-zsh || true
-  cp -rf /root/.tmux.conf \"\${THIS_BUILD_HOME}\"/.tmux.conf || true
+  for config in /root/.vim /root/.vimrc /root/.bashrc /root/.zshrc /root/.zprofile /root/.oh-my-zsh /root/.tmux.conf; do
+    [ -e \"\${config}\" ] && cp -rf \"\${config}\" \"\${THIS_BUILD_HOME}\"/
+  done
 
   chown -R \"\${THIS_BUILD_USER}\":\"\${THIS_BUILD_USER}\" \"\${THIS_BUILD_HOME}\"
 
   service ssh start || true
-} 1>/login.log 2>&1
+  set +x
+} 1>/login/login.log 2>&1
 
 sudo -u \"#\${THIS_BUILD_UID}\" --preserve-env HOME=\"\${THIS_BUILD_HOME}\" PYTHONPATH=\"\${PYTHONPATH}\" PATH=\"\${THIS_BUILD_HOME}/.local/bin:\${GOPATH}/bin:\${PATH}\" \"\${COMMAND_ARGS[@]}\"
 
